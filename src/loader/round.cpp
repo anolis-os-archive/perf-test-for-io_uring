@@ -31,6 +31,10 @@ static void arg_parser(int argc, char **argv) {
     }
 }
 
+static long int get_duration_in_us(time_point<steady_clock> later, time_point<steady_clock> former) {
+    return duration_cast<microseconds>(later - former).count();
+}
+
 void loader_init(int argc, char **argv) {
     static time_point<steady_clock> timer_a;
     static time_point<steady_clock> timer_b;
@@ -42,37 +46,38 @@ void loader_init(int argc, char **argv) {
     timer_a = steady_clock::now();
     test_init(argc, argv);
     timer_b = steady_clock::now();
-    INFO("test_init \t: %ld", duration_cast<microseconds>(timer_b - timer_a).count())
+    INFO("test_init \t: %ld us", get_duration_in_us(timer_b, timer_a))
 
     DEBUG("%s", "start warming up...")
     for (int i = 0; i < warm_up_round; ++i) {
         timer_a = chrono::steady_clock::now();
         test_loop(argc, argv);
         timer_b = chrono::steady_clock::now();
-        INFO("warm up #%d \t: %ld", i, duration_cast<microseconds>(timer_b - timer_a).count())
+        INFO("warm up #%d \t: %ld us", i, get_duration_in_us(timer_b, timer_a))
     }
 }
 
 void loader_run_test(int argc, char **argv) {
-    static chrono::time_point <steady_clock> timer_a;
-    static chrono::time_point <steady_clock> timer_b;
+    static time_point<steady_clock> timer_a;
+    static time_point<steady_clock> timer_b;
 
     DEBUG("%s", "start running test...")
+    DEBUG("%s", "result show in usec")
     for (int i = 0; i < round_count; ++i) {
         timer_a = chrono::steady_clock::now();
         test_loop(argc, argv);
         timer_b = chrono::steady_clock::now();
-        INFO("test #%d \t: %ld", i, duration_cast<microseconds>(timer_b - timer_a).count())
+        INFO("test #%d \t: %ld", i, get_duration_in_us(timer_b, timer_a))
     }
 }
 
 void loader_clean_up(int argc, char **argv) {
-    static chrono::time_point <steady_clock> timer_a;
-    static chrono::time_point <steady_clock> timer_b;
+    static time_point<steady_clock> timer_a;
+    static time_point<steady_clock> timer_b;
 
     DEBUG("%s", "start cleanup")
     timer_a = chrono::steady_clock::now();
     test_cleanup(argc, argv);
     timer_b = chrono::steady_clock::now();
-    INFO("clean up \t: %ld", duration_cast<microseconds>(timer_b - timer_a).count())
+    INFO("clean up \t: %ld us", get_duration_in_us(timer_b, timer_a))
 }
