@@ -35,6 +35,10 @@ static long int get_duration_in_us(time_point<steady_clock> later, time_point<st
     return duration_cast<microseconds>(later - former).count();
 }
 
+static long int get_duration_in_ns(time_point<steady_clock> later, time_point<steady_clock> former) {
+    return duration_cast<nanoseconds>(later - former).count();
+}
+
 void loader_init(int argc, char **argv) {
     static time_point<steady_clock> timer_a;
     static time_point<steady_clock> timer_b;
