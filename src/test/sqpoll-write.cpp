@@ -84,7 +84,7 @@ void test_init(int argc, char **argv) {
     ERR_TEST(fseek(fp, file_size, SEEK_SET), ret, ret != 0)
     ERR_TEST(fputc('\0', fp), ret, ret == EOF)
     ERR_TEST(fclose(fp), ret, ret == EOF)
-    ERR_TEST(fopen(file_name, "r"), fp, fp == nullptr)
+    ERR_TEST(fopen(file_name, "w"), fp, fp == nullptr)
 
     // create io uring instance
     iu = new io_uring;
@@ -110,7 +110,7 @@ static void io_action() {
 
     for (int j = 0; j < io_depth; ++j) {
         ERR_TEST(io_uring_get_sqe(iu), sqe, sqe == nullptr)
-        io_uring_prep_read(sqe, 0, bufs[j], io_size, offsets[j]);
+        io_uring_prep_write(sqe, 0, bufs[j], io_size, offsets[j]);
     }
     ERR_TEST(io_uring_submit(iu), ret, ret <= 0)
 
