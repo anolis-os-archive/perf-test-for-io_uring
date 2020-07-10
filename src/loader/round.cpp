@@ -66,12 +66,12 @@ void loader_run_test(int argc, char **argv) {
     static time_point<steady_clock> timer_b;
 
     DEBUG("%s", "start running test...")
-    DEBUG("%s", "result show in usec")
+    DEBUG("%s", "result show in ns")
     for (int i = 0; i < round_count; ++i) {
         timer_a = chrono::steady_clock::now();
         test_loop(argc, argv);
         timer_b = chrono::steady_clock::now();
-        INFO("test #%d \t: %ld", i, get_duration_in_us(timer_b, timer_a))
+        INFO("test #%d \t: %ld", i, get_duration_in_ns(timer_b, timer_a))
     }
 }
 
