@@ -41,7 +41,7 @@ static void show_help() {
          "          [-d io_depth]" << endl <<
          "          [-i file_size]" << endl <<
          "          [-h]" << endl <<
-         "          -f directory" << endl;
+         "          -f filename" << endl;
 }
 
 static void arg_parser(int argc, char **argv) {
