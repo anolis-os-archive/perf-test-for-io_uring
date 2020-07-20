@@ -41,7 +41,7 @@ usage:    [-s io_size]
           -f filename
 ```
 
-```shell script
+```
 $./round_writev -i 536870912 -f /path/to/test_file
 ```
 
