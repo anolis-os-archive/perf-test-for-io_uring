@@ -4,7 +4,7 @@ a framework for performance tests on io_uring.
 
 # compile
 
-```shell script
+```
 mkdir cmake-build-debug
 cd cmake-build-debug/
 cmake ..
@@ -31,7 +31,7 @@ run the elf file, and refer to detailed help via argument `-h`:
 
 example: round_writev
 
-```shell script
+```
 $./round_writev -h
 [INFO]  start test : /tmp/tmp.31XL3mGv3i/src/test/writev.cpp
 usage:    [-s io_size]
