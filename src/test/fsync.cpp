@@ -21,31 +21,8 @@ static int fd;
 static char file_name[] = "/tmp/io_uring_perf/io_uring_perf-XXXXXX";
 
 
-static void show_help() {
-    cout <<
-         "usage:    " << endl <<
-         "          [-h]" << endl;
-}
-
-static void arg_parser(int argc, char **argv) {
-    int ret;
-
-    optind = 1;
-    while ((ret = getopt(argc, argv, "h")) != -1) {
-        switch (ret) {
-            case 'h':
-                show_help();
-                exit(1);
-            default:
-                break;
-        }
-    }
-}
-
 void test_init(int argc, char **argv) {
     int ret;
-
-    arg_parser(argc, argv);
 
     // prepare file
     ERR_TEST(mkstemp(file_name), fd, fd == -1)
