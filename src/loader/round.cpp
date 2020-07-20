@@ -50,14 +50,14 @@ void loader_init(int argc, char **argv) {
     timer_a = steady_clock::now();
     test_init(argc, argv);
     timer_b = steady_clock::now();
-    INFO("test_init \t: %ld us", get_duration_in_us(timer_b, timer_a))
+    printf("test_init \t: %ld us\n", get_duration_in_us(timer_b, timer_a));
 
     DEBUG("%s", "start warming up...")
     for (int i = 0; i < warm_up_round; ++i) {
         timer_a = chrono::steady_clock::now();
         test_loop_body(argc, argv);
         timer_b = chrono::steady_clock::now();
-        INFO("warm up #%d \t: %ld us", i, get_duration_in_us(timer_b, timer_a))
+        printf("warm up #%d \t: %ld us\n", i, get_duration_in_us(timer_b, timer_a));
     }
 }
 
@@ -71,7 +71,7 @@ void loader_run_test(int argc, char **argv) {
         timer_a = chrono::steady_clock::now();
         test_loop_body(argc, argv);
         timer_b = chrono::steady_clock::now();
-        INFO("test #%d \t: %ld", i, get_duration_in_ns(timer_b, timer_a))
+        printf("test #%d \t: %ld\n", i, get_duration_in_ns(timer_b, timer_a));
     }
 }
 
@@ -83,5 +83,5 @@ void loader_clean_up(int argc, char **argv) {
     timer_a = chrono::steady_clock::now();
     test_cleanup(argc, argv);
     timer_b = chrono::steady_clock::now();
-    INFO("clean up \t: %ld us", get_duration_in_us(timer_b, timer_a))
+    printf("clean up \t: %ld us\n", get_duration_in_us(timer_b, timer_a));
 }
