@@ -31,7 +31,7 @@ static void arg_parser(int argc, char **argv) {
     int ret;
 
     optind = 1;
-    while ((ret = getopt(argc, argv, "s:d:i:f:h")) != -1) {
+    while ((ret = getopt(argc, argv, "h")) != -1) {
         switch (ret) {
             case 'h':
                 show_help();
