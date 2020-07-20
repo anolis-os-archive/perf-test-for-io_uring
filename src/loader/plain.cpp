@@ -14,7 +14,7 @@ void loader_init(int argc, char **argv) {
 
 void loader_run_test(int argc, char **argv) {
     cout << "plain test running" << endl;
-    test_loop(argc, argv);
+    test_loop_body(argc, argv);
     cout << "plain testing finished" << endl;
 }
 

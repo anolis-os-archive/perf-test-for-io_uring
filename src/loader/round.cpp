@@ -55,7 +55,7 @@ void loader_init(int argc, char **argv) {
     DEBUG("%s", "start warming up...")
     for (int i = 0; i < warm_up_round; ++i) {
         timer_a = chrono::steady_clock::now();
-        test_loop(argc, argv);
+        test_loop_body(argc, argv);
         timer_b = chrono::steady_clock::now();
         INFO("warm up #%d \t: %ld us", i, get_duration_in_us(timer_b, timer_a))
     }
@@ -69,7 +69,7 @@ void loader_run_test(int argc, char **argv) {
     DEBUG("%s", "result show in ns")
     for (int i = 0; i < round_count; ++i) {
         timer_a = chrono::steady_clock::now();
-        test_loop(argc, argv);
+        test_loop_body(argc, argv);
         timer_b = chrono::steady_clock::now();
         INFO("test #%d \t: %ld", i, get_duration_in_ns(timer_b, timer_a))
     }

@@ -118,7 +118,7 @@ static void io_action() {
     }
 }
 
-void test_loop(int argc, char **argv) {
+void test_loop_body(int argc, char **argv) {
     (void) argc;
     (void) argv;
     io_action();

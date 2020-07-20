@@ -9,7 +9,7 @@
 
 extern void test_init(int argc, char **argv);
 
-extern void test_loop(int argc, char **argv);
+extern void test_loop_body(int argc, char **argv);
 
 extern void test_cleanup(int argc, char **argv);
 

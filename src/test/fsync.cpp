@@ -55,7 +55,7 @@ void test_init(int argc, char **argv) {
     ERR_TEST(io_uring_queue_init(8, iu, 0), ret, ret != 0)
 }
 
-void test_loop(int argc, char **argv) {
+void test_loop_body(int argc, char **argv) {
     io_uring_sqe *sqe;
     io_uring_cqe *cqe;
     int ret;
