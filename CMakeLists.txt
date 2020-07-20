@@ -18,5 +18,6 @@ foreach (SRC_FILE_LOADER ${SRCS_LOADER})
 
         add_executable(${LOADER_NAME}_${TEST_NAME} ${SRC_FILE_TEST} ${SRC_FILE_LOADER} src/main.cpp)
         target_link_libraries(${LOADER_NAME}_${TEST_NAME} uring)
+        target_link_libraries(${LOADER_NAME}_${TEST_NAME} pthread)
     endforeach (SRC_FILE_TEST ${SRCS_TEST})
 endforeach (SRC_FILE_LOADER ${SRCS_LOADER})
