@@ -8,7 +8,7 @@
 #include <cstdint>
 
 // debug macro, assign cmd return val to var and exit when cond is true
-#define ERR_TEST(cmd, var, cond) do{var=(cmd);if(cond){ALERT("err "#cmd" with %lu",(uint64_t)var)exit(1);}}while(0);\
+#define ERR_TEST(cmd, var, cond) do{var=(cmd);if(cond){ALERT("err "#cmd" with %ld",(int64_t)(var))exit(1);}}while(0);\
 
 // print macro
 #define DEBUG(str, ...) printf("[DEBUG] " str "\n",__VA_ARGS__);
