@@ -16,6 +16,22 @@ static io_uring *iu;
 
 static unsigned int io_depth = 16;
 
+static argp_option ao[] = {
+        {"io-depth", 'd', "io_depth", 0, "set io_depth"},
+        {nullptr}
+};
+
+static int arg_parser(int key, char *text, argp_state *input) {
+    switch (key) {
+        case 'd':
+            io_depth = strtol(text, nullptr, 10);
+            break;
+    }
+    return 0;
+}
+
+argp ap_test = {ao, arg_parser, 0, 0};
+
 void test_init(int argc, char **argv) {
     int ret;
 

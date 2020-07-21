@@ -6,6 +6,7 @@
 #define IO_URING_PERF_HELPER_H
 
 #include <cstdint>
+#include <argp.h>
 
 // debug macro, assign cmd return val to var and exit when cond is true
 #define ERR_TEST(cmd, var, cond) do{var=(cmd);if(cond){ALERT("err "#cmd" with %ld",(int64_t)(var))exit(1);}}while(0);\

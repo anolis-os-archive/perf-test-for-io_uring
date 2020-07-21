@@ -32,51 +32,38 @@ static int *offsets;
 static char **bufs;
 
 
-static void show_help() {
-    cout <<
-         "usage:    [-s io_size]" << endl <<
-         "          [-d io_depth]" << endl <<
-         "          [-i file_size]" << endl <<
-         "          [-h]" << endl <<
-         "          -f directory" << endl;
-}
+static argp_option ao[] = {
+        {nullptr, 'd', "io_depth",  0, "set io_depth"},
+        {nullptr, 'i', "io_size",   0, "set io_size"},
+        {nullptr, 'f', "file_name", 0, "set file path for test"},
+        {nullptr, 's', "file_size", 0, "set test file size"},
+        {nullptr}
+};
 
-static void arg_parser(int argc, char **argv) {
-    int ret;
-
-    optind = 1;
-    while ((ret = getopt(argc, argv, "s:d:i:f:h")) != -1) {
-        switch (ret) {
-            case 's':
-                io_size = strtol(optarg, nullptr, 10);
-                break;
-            case 'd':
-                io_depth = strtol(optarg, nullptr, 10);
-                break;
-            case 'i':
-                file_size = strtol(optarg, nullptr, 10);
-                if (file_size <= 4 * 1024) {
-                }
-                break;
-            case 'f':
-                file_name = static_cast<char *>(malloc(strlen(optarg) + 1));
-                strcpy(file_name, optarg);
-                break;
-            case 'h':
-                show_help();
-                exit(1);
-            default:
-                break;
-        }
+static int arg_parser(int key, char *text, argp_state *input) {
+    switch (key) {
+        case 'd':
+            io_depth = strtol(text, nullptr, 10);
+            break;
+        case 'i':
+            io_size = strtol(text, nullptr, 10);
+            break;
+        case 'f':
+            file_name = static_cast<char *>(malloc(strlen(text) + 1));
+            strcpy(file_name, text);
+            break;
+        case 's':
+            file_size = strtol(text, nullptr, 10);
+            break;
     }
+    return 0;
 }
+
+argp ap_test = {ao, arg_parser, nullptr, nullptr};
 
 void test_init(int argc, char **argv) {
     int ret;
     int fd;
-
-    // load config from args
-    arg_parser(argc, argv);
 
     // prepare file
     DEBUG("%s", file_name)

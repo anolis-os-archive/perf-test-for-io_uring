@@ -21,6 +21,9 @@ static int fd;
 static char file_name[] = "/tmp/io_uring_perf/io_uring_perf-XXXXXX";
 
 
+argp ap_test = {};
+
+
 void test_init(int argc, char **argv) {
     int ret;
 

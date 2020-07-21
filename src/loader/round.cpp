@@ -5,7 +5,6 @@
 #include "loader_base.h"
 #include <iostream>
 #include <chrono>
-#include <getopt.h>
 
 using namespace std;
 using namespace chrono;
@@ -13,23 +12,25 @@ using namespace chrono;
 static unsigned int warm_up_round = 5;
 static unsigned int round_count = 16;
 
-static void arg_parser(int argc, char **argv) {
-    int ret;
+static argp_option ao[] = {
+        {nullptr, 'w', "warm_up",     0, "set warm up round"},
+        {nullptr, 'r', "round_count", 0, "set round count"},
+        {nullptr}
+};
 
-    optind = 1;
-    while ((ret = getopt(argc, argv, "w:r:")) != -1) {
-        switch (ret) {
-            case 'w':
-                warm_up_round = strtol(optarg, nullptr, 10);
-                break;
-            case 'r':
-                round_count = strtol(optarg, nullptr, 10);
-                break;
-            default:
-                break;
-        }
+static int arg_parser(int key, char *text, argp_state *input) {
+    switch (key) {
+        case 'w':
+            warm_up_round = strtol(text, nullptr, 10);
+            break;
+        case 'r':
+            round_count = strtol(text, nullptr, 10);
+            break;
     }
+    return 0;
 }
+
+argp ap_loader = {ao, arg_parser, nullptr, nullptr};
 
 static long int get_duration_in_us(time_point<steady_clock> later, time_point<steady_clock> former) {
     return duration_cast<microseconds>(later - former).count();
