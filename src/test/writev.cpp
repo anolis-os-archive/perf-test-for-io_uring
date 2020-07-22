@@ -49,7 +49,7 @@ static int arg_parser(int key, char *text, argp_state *input) {
             io_depth = strtol(text, nullptr, 10);
             break;
         case 'i':
-            io_size = strtol(text, nullptr, 10);
+            io_size = human2size(text);
             break;
         case 'f':
             file_name = static_cast<char *>(malloc(strlen(text) + 1));

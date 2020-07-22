@@ -61,7 +61,7 @@ Usage: round_write [OPTION...]
 and config the runnning via arguments:
 
 ```
-$./round_write -r 2 -w 1 -d 16 -f "/home/qiyilang.wqyl/nvme/test_file" -i 4096 -s 5368000
+$./round_write -r 2 -w 1 -d 16 -f "/home/qiyilang.wqyl/nvme/test_file" -i 4K -s 500M
 ```
 
 # how test runs
