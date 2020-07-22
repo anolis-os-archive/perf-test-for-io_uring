@@ -13,6 +13,16 @@ make all
 
 # usage
 
+## quick launch
+
+```
+bash ./test.sh
+```
+
+this runs all perf units with configs in `test.sh`
+
+## detailed
+
 compile outputs are several elf file, name in the following rule:
 
 >example: round_sqpoll-read
