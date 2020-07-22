@@ -4,6 +4,14 @@ a framework for performance testing on io_uring.
 
 # compile
 
+## dependencies
+
+1. [liburing](https://github.com/axboe/liburing)
+2. [CMake](https://cmake.org/)
+3. pthread
+
+## build
+
 ```
 cmake -S . -B cmake-build-debug/
 make -C cmake-build-debug/ all
