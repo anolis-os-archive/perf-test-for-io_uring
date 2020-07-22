@@ -5,10 +5,8 @@ a framework for performance testing on io_uring.
 # compile
 
 ```
-mkdir cmake-build-debug
-cd cmake-build-debug/
-cmake ..
-make all
+cmake -S . -B cmake-build-debug/
+make -C cmake-build-debug/ all
 ```
 
 # usage
@@ -19,7 +17,7 @@ make all
 bash ./test.sh
 ```
 
-this runs all perf units with configs in `test.sh`
+this command builds and runs all perf units with configs in `test.sh`
 
 ## detailed
 

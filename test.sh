@@ -24,6 +24,9 @@ declare -A TEST_ARGS=(
   ['sqpoll-write']="-d $VAR_D -i $VAR_I -f $VAR_F -s $VAR_S"
 )
 
+cmake -S . -B cmake-build-debug/
+make -C cmake-build-debug/ all
+
 for l in "${!LOADER_ARGS[@]}"; do
   for t in "${!TEST_ARGS[@]}"; do
     echo "============================"
