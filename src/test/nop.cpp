@@ -26,6 +26,8 @@ static int arg_parser(int key, char *text, argp_state *input) {
         case 'd':
             io_depth = strtol(text, nullptr, 10);
             break;
+        default:
+            break;
     }
     return 0;
 }
