@@ -52,7 +52,7 @@ static int arg_parser(int key, char *text, argp_state *input) {
             strcpy(file_name, text);
             break;
         case 's':
-            file_size = strtol(text, nullptr, 10);
+            file_size = human2size(text);
             break;
         default:
             break;
@@ -67,7 +67,7 @@ void test_init(int argc, char **argv) {
     int fd;
 
     // prepare file
-    DEBUG("%s", file_name)
+    DEBUG("filename = %s , file_size = %u", file_name, file_size)
     ERR_TEST(fopen(file_name, "w"), fp, fp == nullptr)
     ERR_TEST(fseek(fp, file_size, SEEK_SET), ret, ret != 0)
     ERR_TEST(fputc('\0', fp), ret, ret == EOF)

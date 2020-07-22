@@ -6,7 +6,7 @@ VAR_R=2
 VAR_D=32
 VAR_I=4096
 VAR_F="/home/qiyilang.wqyl/nvme/test_file"
-VAR_S=536870912
+VAR_S="500M"
 
 declare -A LOADER_ARGS=(
   ['round']="-r $VAR_R -w $VAR_W"

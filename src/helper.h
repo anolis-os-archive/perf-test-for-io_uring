@@ -6,6 +6,7 @@
 #define IO_URING_PERF_HELPER_H
 
 #include <cstdint>
+#include <cstdlib>
 #include <argp.h>
 
 // debug macro, assign cmd return val to var and exit when cond is true
@@ -28,5 +29,46 @@ inline uint64_t round_up_power_of2(uint64_t n) {
     n++;
     return n;
 }
+
+static char suffix_map[] = {'\0', 'K', 'M', 'G', 'T'};
+
+static unsigned int scan_num(const char *str, unsigned int *p) {
+    unsigned int res = 0;
+
+    while (str[*p] >= '0' && str[*p] <= '9') {
+        res *= 10;
+        res += str[(*p)++] - '0';
+    }
+    return res;
+}
+
+static unsigned int get_ratio(char suffix) {
+    unsigned int res = 1;
+
+    for (char i : suffix_map) {
+        if (suffix == i || suffix == i + 'a' - 'A') return res;
+        else res *= 1024;
+    }
+    return -1;
+}
+
+static unsigned int human2size(const char *str) {
+    unsigned int res = 0;
+    unsigned int ratio;
+    unsigned int t_res;
+    unsigned int p = 0;
+
+    while (str[p] != '\0') {
+        t_res = 0;
+        t_res += scan_num(str, &p);
+        ERR_TEST(get_ratio(str[p]), ratio, ratio == -1)
+        t_res *= ratio;
+        res += t_res;
+        if (str[p] == '\0') break;
+        else p++;
+    }
+    return res;
+}
+
 
 #endif //IO_URING_PERF_HELPER_H
