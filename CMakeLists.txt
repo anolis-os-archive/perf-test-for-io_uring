@@ -1,12 +1,10 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 2.8)
 project(perf-test-for-io_uring)
 
 set(CMAKE_CXX_STANDARD 11)
 
 file(GLOB SRCS_TEST "src/test/*.cpp")
 file(GLOB SRCS_LOADER "src/loader/*.cpp")
-
-list(FILTER SRCS_LOADER EXCLUDE REGEX ".*/plain.cpp$")
 
 foreach (SRC_FILE_LOADER ${SRCS_LOADER})
     get_filename_component(LOADER_FILE ${SRC_FILE_LOADER} NAME)
