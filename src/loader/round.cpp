@@ -72,7 +72,7 @@ void loader_run_test(int argc, char **argv) {
         timer_a = chrono::steady_clock::now();
         test_loop_body(argc, argv);
         timer_b = chrono::steady_clock::now();
-        printf("test #%d \t: %ld\n", i, get_duration_in_ns(timer_b, timer_a));
+        printf("test #%d latency \t: %ld\n", i, get_duration_in_ns(timer_b, timer_a));
     }
 }
 
