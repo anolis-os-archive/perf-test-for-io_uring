@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-VAR_W=1
-VAR_R=2
+VAR_W=10
+VAR_R=30
 
-VAR_D=32
-VAR_I=4096
-VAR_F="/home/qiyilang.wqyl/nvme/test_file"
+VAR_D=16
+VAR_I="4K"
+VAR_F="/tmp/io_uring_perf/test_file"
 VAR_S="500M"
 
 declare -A LOADER_ARGS=(
